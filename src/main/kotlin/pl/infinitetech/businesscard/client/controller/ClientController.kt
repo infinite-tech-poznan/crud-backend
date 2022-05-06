@@ -5,6 +5,7 @@ import pl.infinitetech.businesscard.client.dao.Client
 import pl.infinitetech.businesscard.client.service.ClientService
 
 @RestController
+@CrossOrigin("http://localhost:8080/")
 class ClientController(private val clientService: ClientService) {
 
     @GetMapping("/clients")

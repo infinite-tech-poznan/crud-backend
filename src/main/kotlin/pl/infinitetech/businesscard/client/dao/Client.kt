@@ -9,11 +9,11 @@ data class Client (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,
     @Column(name = "first_name", nullable = false)
-    val firstName: String,
+    var firstName: String,
     @Column(name = "last_name", nullable = false)
-    val lastName: String,
+    var lastName: String,
     @Column(name = "email_address", nullable = false)
-    val emailId: String,
+    var emailId: String,
     @Column(name = "phone_number", nullable = false)
-    val phoneNumber: Number
+    var phoneNumber: Number
 )

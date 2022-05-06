@@ -17,22 +17,21 @@ class ClientService(private val clientRepository: ClientRepository) {
     fun createEmployee(employee: Client): Client = clientRepository.save(employee)
 
     fun updateEmployeeById(employeeId: Long, employee: Client): Client {
-        return if (clientRepository.existsById(employeeId)) {
-            clientRepository.save(
-                Client(
-                    id = employee.id,
-                    firstName = employee.firstName,
-                    lastName = employee.lastName,
-                    emailId = employee.emailId,
-                    phoneNumber = employee.phoneNumber
-                )
+         if (clientRepository.existsById(employeeId)) {
+            var updateClient = clientRepository.getById(employeeId)
+            updateClient.firstName = employee.firstName;
+            updateClient.lastName = employee.lastName;
+            updateClient.phoneNumber = employee.phoneNumber
+            updateClient.emailId = employee.emailId
+            return clientRepository.save(
+               updateClient
             )
-        } else throw ClientNotFoundException(HttpStatus.NOT_FOUND, "No matching employee was found")
+        } else throw ClientNotFoundException(HttpStatus.NOT_FOUND, "No matching client was found")
     }
 
     fun deleteEmployeesById(employeeId: Long) {
         return if (clientRepository.existsById(employeeId)) {
             clientRepository.deleteById(employeeId)
-        } else throw ClientNotFoundException(HttpStatus.NOT_FOUND, "No matching employee was found")
+        } else throw ClientNotFoundException(HttpStatus.NOT_FOUND, "No matching client was found")
     }
 }
